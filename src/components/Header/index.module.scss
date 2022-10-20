@@ -1,0 +1,47 @@
+@use '/styles/colors';
+
+.container {
+  display: flex;
+  padding-top: 26px;
+
+  .visitors {
+    width: 208px;
+    display: flex;
+    justify-content: center;
+    font-size: 9px;
+    line-height: 9px;
+
+    .vertical-line {
+      height: 8px;
+      border-left: 1px solid #000;
+      transform: translateY(50%);
+      margin: 0 8px;
+    }
+
+    .text {
+      display: flex;
+      align-items: center;
+      text-transform: uppercase;
+    }
+  }
+
+  .title-container {
+    display: flex;
+    width: 524px;
+    justify-content: space-between;
+    margin-left: 6px;
+
+    .title {
+      font-family: NeoDunggeunmo, sans-serif;
+      font-size: 16px;
+      line-height: 16px;
+      color: colors.$blue;
+    }
+
+    .privacy-setting {
+      font-size: 11px;
+      font-weight: 200;
+      line-height: 16px;
+    }
+  }
+}

@@ -4,7 +4,9 @@ function Header() {
   return (
     <div className={styles.container}>
       <div className={styles.visitors}>
-        <span className={styles.text}>today 0</span>
+        <span className={styles.text}>
+          today &nbsp;<span className={styles.today}>0</span>
+        </span>
         <div className={styles['vertical-line']}></div>
         <span className={styles.text}>total 12345</span>
       </div>

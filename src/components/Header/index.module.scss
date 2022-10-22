@@ -22,6 +22,10 @@
       display: flex;
       align-items: center;
       text-transform: uppercase;
+
+      .today {
+        color: red;
+      }
     }
   }
 
@@ -29,7 +33,7 @@
     display: flex;
     width: 524px;
     justify-content: space-between;
-    margin-left: 6px;
+    margin-left: 18px;
 
     .title {
       font-family: NeoDunggeunmo, sans-serif;

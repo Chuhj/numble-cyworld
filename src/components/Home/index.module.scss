@@ -1,0 +1,135 @@
+@use '/styles/colors';
+@use '/styles/text-styles';
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .titleContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    @include text-styles.title;
+  }
+
+  .subtitle {
+    @include text-styles.subtitle;
+    margin-left: 15px;
+  }
+
+  .board {
+    display: flex;
+    font-weight: 400;
+    font-size: 9px;
+    line-height: 9.19px;
+
+    .news {
+      position: relative;
+
+      .line {
+        height: 1px;
+        width: 253px;
+        background-color: colors.$border;
+        margin-top: 3px;
+        margin-bottom: 3px;
+      }
+
+      .item {
+        display: flex;
+        align-items: center;
+        padding: 2px 0;
+
+        .badge {
+          padding: 3px 2px;
+          margin-right: 3px;
+          background-color: colors.$coral;
+          font-size: 7px;
+          font-weight: 400;
+          line-height: 5px;
+          color: colors.$white;
+          border-radius: 1px;
+        }
+
+        .diary-title {
+          font-size: 8px;
+        }
+      }
+    }
+
+    .status {
+      width: 100%;
+      margin-top: 20px;
+      margin-left: 17px;
+      .row {
+        display: flex;
+        align-items: center;
+        height: 18px;
+        border-top: 1px dashed colors.$border;
+
+        &:last-child {
+          border-bottom: 1px dashed colors.$border;
+        }
+        .col {
+          width: 50%;
+
+          span:last-child {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+  }
+
+  .bgm {
+    height: 244px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+
+    .category {
+      display: flex;
+      align-items: center;
+      border-top: 1px solid colors.$border;
+      border-bottom: 1px solid colors.$border;
+      background-color: colors.$bar-background;
+    }
+
+    .category-detail {
+      @extend .song-detail;
+      font-weight: 700;
+      color: colors.$border;
+    }
+
+    .song-detail {
+      font-size: 10px;
+      line-height: 13.3px;
+      &:nth-child(1) {
+        width: auto;
+        margin-left: 15px;
+      }
+      &:nth-child(2) {
+        width: 15%;
+        text-align: center;
+      }
+      &:nth-child(3) {
+        width: 60%;
+      }
+      &:nth-child(4) {
+        width: 25%;
+      }
+    }
+
+    .song-list {
+      .song-item {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px dashed colors.$border;
+      }
+    }
+  }
+}

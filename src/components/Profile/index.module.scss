@@ -1,0 +1,62 @@
+@use '/styles/colors';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 208px;
+  height: 440px;
+  border: 1px solid colors.$border;
+  border-radius: 10px;
+  background-color: colors.$white;
+  padding: 30px;
+
+  .profile-img {
+    position: relative;
+    height: 123px;
+  }
+
+  .line {
+    margin: 10px 0 10px 0;
+    border: 1px dashed #000;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    margin-top: -10px;
+
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 10.75px;
+
+    div {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+
+      span {
+        text-transform: capitalize;
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .todays-feeling {
+    display: flex;
+    flex-direction: column;
+
+    .text {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 12.63px;
+      margin-bottom: 5px;
+    }
+
+    .select {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 14.63px;
+    }
+  }
+}

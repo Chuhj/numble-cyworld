@@ -1,12 +1,12 @@
-import Layout from '../src/components/Layout';
+import AppLayout from '../src/components/AppLayout';
 import type { AppProps } from 'next/app';
 import 'styles/globals.scss';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
+    <AppLayout>
       <Component {...pageProps} />
-    </Layout>
+    </AppLayout>
   );
 }
 

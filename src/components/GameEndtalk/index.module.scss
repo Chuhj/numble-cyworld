@@ -1,0 +1,5 @@
+@use '../Game/index.module.scss' as game;
+
+.card-endtalk {
+  @include game.card;
+}

@@ -1,6 +1,7 @@
 import styles from './index.module.scss';
+import { HomeDiariesData } from '../../../pages/index';
 
-function Home() {
+function Home({ diaries }: HomeDiariesData) {
   return (
     <div className={styles.container}>
       <div className={styles.board}>
@@ -8,10 +9,13 @@ function Home() {
           <span className={styles.title}>Updated news</span>
           <div className={styles.line}></div>
           <ul>
-            <li className={styles.item}>
-              <div className={styles.badge}>다이어리</div>
-              <span className={styles['diary-title']}>다이어리 제목1</span>
-            </li>
+            {diaries &&
+              diaries.map((diary) => (
+                <li key={diary.number} className={styles.item}>
+                  <div className={styles.badge}>다이어리</div>
+                  <span className={styles['diary-title']}>{diary.title}</span>
+                </li>
+              ))}
           </ul>
         </div>
         <div className={styles.status}>
@@ -35,7 +39,7 @@ function Home() {
               <span>0/15</span>
             </div>
           </div>
-          <div></div>
+          <div className={styles.row}></div>
         </div>
       </div>
       <div className={styles.bgm}>

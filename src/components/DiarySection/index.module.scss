@@ -1,0 +1,67 @@
+@use '/styles/colors';
+@use '/styles/text-styles';
+@use '../Game/index.module.scss' as game;
+
+.line {
+  @include game.line;
+}
+
+.titleContainer {
+  @include game.titleContainer;
+  display: flex;
+  justify-content: space-between;
+
+  .writeBtn {
+    padding: 3px 5px;
+    background-color: colors.$white;
+    border: 1px solid colors.$border;
+    border-radius: 4px;
+    font-size: 11px;
+    cursor: pointer;
+    &:hover {
+      color: white;
+      background-color: colors.$song;
+      transition: color 0.15s, background-color 0.15s;
+    }
+  }
+}
+
+.post-container {
+  display: flex;
+  flex-direction: column;
+
+  .post {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: 1px solid colors.$border;
+    border-radius: 2px;
+
+    .post-info {
+      display: flex;
+      flex-direction: column;
+      font-size: 13px;
+
+      .badge {
+        width: fit-content;
+        padding: 1px 5px;
+        margin-bottom: 5px;
+        border-radius: 3px;
+        font-size: 11px;
+        color: colors.$white;
+        background-color: colors.$blue;
+      }
+    }
+
+    .link {
+      font-size: 12px;
+      border-bottom: 1px solid colors.$border;
+
+      &:hover {
+        color: green;
+      }
+    }
+  }
+}

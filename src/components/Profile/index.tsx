@@ -1,7 +1,27 @@
+import { useQuery } from '@apollo/client';
 import Image from 'next/image';
 import styles from './index.module.scss';
+import { GET_PROFILE } from '../../queries/profile';
+
+interface Profile {
+  name: string;
+  age: number;
+  school: string;
+}
+
+interface ProfileData {
+  fetchProfile: Profile;
+}
+
+interface ProfileVars {
+  name: string;
+}
 
 function Profile() {
+  const { data, error } = useQuery<ProfileData, ProfileVars>(GET_PROFILE, {
+    variables: { name: '김헨리' },
+  });
+
   return (
     <div className={styles.container}>
       <div className={styles.profile}>
@@ -9,22 +29,15 @@ function Profile() {
           <Image src="/images/profile.png" alt="profile" layout="fill" />
         </div>
         <div className={styles.line}></div>
+        {error ? 'ERROR!' : null}
         <div className={styles.info}>
           <div>
             <Image src="/images/name.svg" alt="name" width={12} height={12} />
-            <span>이름</span>
+            <span>{data && `${data.fetchProfile?.name} (${data.fetchProfile.age})`}</span>
           </div>
           <div>
-            <Image src="/images/phone.svg" alt="name" width={12} height={12} />
-            <span>phone</span>
-          </div>
-          <div>
-            <Image src="/images/email.svg" alt="name" width={12} height={12} />
-            <span>e-mail</span>
-          </div>
-          <div>
-            <Image src="/images/instagram.svg" alt="name" width={12} height={12} />
-            <span>인스타그램</span>{' '}
+            <Image src="/images/instagram.svg" alt="school" width={12} height={12} />
+            <span>{data && data.fetchProfile?.school}</span>{' '}
           </div>
         </div>
       </div>

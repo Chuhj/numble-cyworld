@@ -2,6 +2,19 @@ import styles from './index.module.scss';
 import { HomeDiariesData } from '../../../pages/index';
 
 function Home({ diaries }: HomeDiariesData) {
+  const songList = [
+    { number: 1, name: '눈의 꽃', artist: '박효신' },
+    { number: 2, name: '사랑스러워', artist: '김종국' },
+    { number: 3, name: '내사람: Partner For Life', artist: 'SG 워너비' },
+    { number: 4, name: 'Love Love Love', artist: '에픽하이' },
+    { number: 5, name: '애인...있어요', artist: '백지영' },
+    { number: 6, name: '눈의 꽃', artist: '박효신' },
+    { number: 7, name: '사랑스러워', artist: '김종국' },
+    { number: 8, name: '내사람: Partner For Life', artist: 'SG 워너비' },
+    { number: 9, name: 'Love Love Love', artist: '에픽하이' },
+    { number: 10, name: '애인...있어요', artist: '백지영' },
+  ];
+
   return (
     <div className={styles.container}>
       <div className={styles.board}>
@@ -58,12 +71,14 @@ function Home({ diaries }: HomeDiariesData) {
             <div className={styles['category-detail']}>아티스트</div>
           </div>
           <ol className={styles['song-list']}>
-            <li className={styles['song-item']}>
-              <input type="checkbox" className={styles['song-detail']} />
-              <div className={styles['song-detail']}>1</div>
-              <div className={styles['song-detail']}>눈의 꽃</div>
-              <div className={styles['song-detail']}>박효신</div>
-            </li>
+            {songList.map(({ number, name, artist }) => (
+              <li key={number} className={styles['song-item']}>
+                <input type="checkbox" className={styles['song-detail']} />
+                <div className={styles['song-detail']}>{number}</div>
+                <div className={styles['song-detail']}>{name}</div>
+                <div className={styles['song-detail']}>{artist}</div>
+              </li>
+            ))}
           </ol>
         </div>
       </div>

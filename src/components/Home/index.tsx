@@ -1,5 +1,6 @@
 import styles from './index.module.scss';
 import { HomeDiariesData } from '../../../pages/index';
+import Link from 'next/link';
 
 function Home({ diaries }: HomeDiariesData) {
   const songList = [
@@ -14,7 +15,6 @@ function Home({ diaries }: HomeDiariesData) {
     { number: 9, name: 'Love Love Love', artist: '에픽하이' },
     { number: 10, name: '애인...있어요', artist: '백지영' },
   ];
-
   return (
     <div className={styles.container}>
       <div className={styles.board}>
@@ -26,7 +26,9 @@ function Home({ diaries }: HomeDiariesData) {
               diaries.map((diary) => (
                 <li key={diary.number} className={styles.item}>
                   <div className={styles.badge}>다이어리</div>
-                  <span className={styles['diary-title']}>{diary.title}</span>
+                  <Link href={`/diary/${diary.number}`}>
+                    <span className={styles['diary-title']}>{diary.title}</span>
+                  </Link>
                 </li>
               ))}
           </ul>

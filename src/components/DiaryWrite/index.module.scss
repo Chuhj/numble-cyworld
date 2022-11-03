@@ -1,0 +1,67 @@
+@use '/styles/colors';
+@use '/styles/text-styles';
+@use '../Game/index.module.scss' as game;
+
+.line {
+  @include game.line;
+}
+
+.titleContainer {
+  @include game.titleContainer;
+}
+
+.inputs {
+  height: 316px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 7px;
+  border: 1px solid colors.$border-diary;
+
+  .text,
+  .textarea {
+    height: 18px;
+    width: 424px;
+    border: 1px solid colors.$border-diary;
+    border-radius: 3px;
+    outline: none;
+    font-family: S-CoreDream-3Light, sans-serif;
+    font-size: 12px;
+    line-height: 10px;
+  }
+
+  .textarea {
+    height: 248px;
+    resize: none;
+  }
+}
+
+.buttons {
+  margin: 15px 0;
+  text-align: center;
+
+  button {
+    color: colors.$song;
+    background-color: #d9d9d9;
+    border: 1px solid colors.$border;
+    border-radius: 2px;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover {
+      color: #d9d9d9;
+      background-color: colors.$song;
+    }
+  }
+  button:nth-child(1) {
+    margin-right: 28px;
+  }
+}
+
+.link {
+  font-size: 12px;
+  font-height: 15px;
+  letter-spacing: -0.08em;
+  text-decoration-line: underline;
+}

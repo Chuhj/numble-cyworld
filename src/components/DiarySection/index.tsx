@@ -1,6 +1,7 @@
 import { gql } from '@apollo/client';
 import { useQuery } from '@apollo/client';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import styles from './index.module.scss';
 
 export interface DiariesData {
@@ -16,8 +17,14 @@ export const GET_DIARIES = gql`
     }
   }
 `;
+
 function DiarySection() {
-  const { data, loading, error } = useQuery<DiariesData>(GET_DIARIES);
+  const { data, loading, error, refetch } = useQuery<DiariesData>(GET_DIARIES);
+
+  useEffect(() => {
+    // 다이어리 페이지로 들어올 때 마다 refetch
+    refetch();
+  }, [refetch]);
 
   const diaries = data?.diaries.slice(0, 5);
   return (

@@ -1,7 +1,6 @@
-import { useQuery } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import Image from 'next/image';
 import styles from './index.module.scss';
-import { GET_PROFILE } from '../../queries/profile';
 
 interface Profile {
   name: string;
@@ -16,6 +15,16 @@ interface ProfileData {
 interface ProfileVars {
   name: string;
 }
+
+const GET_PROFILE = gql`
+  query FetchProfile($name: String!) {
+    fetchProfile(name: $name) {
+      name
+      age
+      school
+    }
+  }
+`;
 
 function Profile() {
   const { data, error } = useQuery<ProfileData, ProfileVars>(GET_PROFILE, {

@@ -76,6 +76,7 @@ function DiaryDetail() {
 
   const handleClickDelete = () => {
     if (!number) return;
+    if (!confirm('삭제하시겠습니까?')) return;
 
     deleteDiary({
       onCompleted: (data) => {

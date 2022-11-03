@@ -63,11 +63,12 @@ function DiaryEdit() {
       alert('제목을 입력해주세요');
       return;
     }
-
     if (!contents) {
       alert('내용을 입력해주세요');
       return;
     }
+    if (!confirm('수정하시겠습니까?')) return;
+
     editDiary({
       variables: {
         number: Number(router.query?.number),

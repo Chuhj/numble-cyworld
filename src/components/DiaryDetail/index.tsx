@@ -1,9 +1,35 @@
 import Link from 'next/link';
 import styles from './index.module.scss';
-import { DiaryData } from '../../../pages/diary/[number]';
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { GET_DIARIES, DiariesData } from '../DiarySection';
+import { useEffect } from 'react';
+
+interface DiaryData {
+  diary: {
+    writer: string;
+    title: string;
+    contents: string;
+    like: number;
+    createdAt: string;
+  };
+}
+
+interface GetDiaryVars {
+  number: number;
+}
+
+const GET_DIARY = gql`
+  query FetchBoard($number: Int!) {
+    diary: fetchBoard(number: $number) {
+      writer
+      title
+      contents
+      like
+      createdAt
+    }
+  }
+`;
 
 interface DeleteDiaryVars {
   number: number;
@@ -25,13 +51,19 @@ const DELETE_DIARY = gql`
   }
 `;
 
-function DiaryDetail({ diary }: DiaryData) {
+function DiaryDetail() {
   const router = useRouter();
   const { number } = router.query || '';
+
+  const { data, loading, error, refetch } = useQuery<DiaryData, GetDiaryVars>(GET_DIARY, {
+    variables: { number: Number(number) },
+  });
+  const diary = data?.diary;
 
   const [deleteDiary] = useMutation<DeleteDiaryResponse, DeleteDiaryVars>(DELETE_DIARY, {
     variables: { number: Number(number) },
     update: (cache, { data }) => {
+      // 삭제를 완료하면 캐시에서 게시물을 삭제
       const queryData = cache.readQuery<DiariesData>({ query: GET_DIARIES });
       const localDiaries = queryData?.diaries;
 
@@ -54,6 +86,10 @@ function DiaryDetail({ diary }: DiaryData) {
     });
   };
 
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
   return (
     <>
       <div className={styles.titleContainer}>
@@ -68,14 +104,22 @@ function DiaryDetail({ diary }: DiaryData) {
             <span className={styles.date}>{diary && diary.createdAt.split('T')[0]}</span>
             <span className={styles.writer}>{diary && diary.writer}</span>
           </div>
-          <h4 className={styles['diary-title']}>제목: {diary.title}</h4>
+          <h4 className={styles['diary-title']}>제목: {diary && diary.title}</h4>
+          {error && 'Error'}
+          {!data && loading ? 'Loading...' : null}
           <p className={styles.contents}>{diary && diary.contents}</p>
         </div>
       </div>
       <div className={styles.buttons}>
-        <button>
-          <Link href={`/diary/${number}/edit`}>수정하기</Link>
-        </button>
+        <Link
+          href={{
+            pathname: `/diary/${number}/edit`,
+            query: { title: diary?.title, contents: diary?.contents, writer: diary?.writer },
+          }}
+          as={`/diary/${number}/edit`}
+        >
+          <button>수정하기</button>
+        </Link>
         <button onClick={handleClickDelete}>삭제하기</button>
       </div>
       <span className={styles.link}>

@@ -4,6 +4,7 @@ import Home from '../src/components/Home';
 
 export interface HomeDiariesData {
   diaries: { number: number; title: string }[];
+  error: string | null;
 }
 
 const GET_HOME_DIARIES = gql`
@@ -15,18 +16,30 @@ const GET_HOME_DIARIES = gql`
   }
 `;
 
-function HomePage({ diaries }: HomeDiariesData) {
-  return <Home diaries={diaries} />;
+function HomePage({ diaries, error }: HomeDiariesData) {
+  return <Home diaries={diaries} error={error} />;
 }
 
-export async function getStaticProps() {
-  const { data } = await client.query<HomeDiariesData>({
+export async function getServerSideProps() {
+  const { data, error } = await client.query<HomeDiariesData>({
     query: GET_HOME_DIARIES,
+    fetchPolicy: 'network-only',
   });
+  const diaries = data?.diaries.slice(0, 4);
+
+  if (error) {
+    return {
+      props: {
+        diaries: [],
+        error: error.message,
+      },
+    };
+  }
 
   return {
     props: {
-      diaries: data.diaries.slice(0, 4),
+      diaries,
+      error: null,
     },
   };
 }

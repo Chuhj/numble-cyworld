@@ -1,20 +1,21 @@
 import styles from './index.module.scss';
-import { HomeDiariesData } from '../../../pages/index';
 import Link from 'next/link';
+import { HomeDiariesData } from '../../../pages';
 
-function Home({ diaries }: HomeDiariesData) {
-  const songList = [
-    { number: 1, name: '눈의 꽃', artist: '박효신' },
-    { number: 2, name: '사랑스러워', artist: '김종국' },
-    { number: 3, name: '내사람: Partner For Life', artist: 'SG 워너비' },
-    { number: 4, name: 'Love Love Love', artist: '에픽하이' },
-    { number: 5, name: '애인...있어요', artist: '백지영' },
-    { number: 6, name: '눈의 꽃', artist: '박효신' },
-    { number: 7, name: '사랑스러워', artist: '김종국' },
-    { number: 8, name: '내사람: Partner For Life', artist: 'SG 워너비' },
-    { number: 9, name: 'Love Love Love', artist: '에픽하이' },
-    { number: 10, name: '애인...있어요', artist: '백지영' },
-  ];
+const songList = [
+  { number: 1, name: '눈의 꽃', artist: '박효신' },
+  { number: 2, name: '사랑스러워', artist: '김종국' },
+  { number: 3, name: '내사람: Partner For Life', artist: 'SG 워너비' },
+  { number: 4, name: 'Love Love Love', artist: '에픽하이' },
+  { number: 5, name: '애인...있어요', artist: '백지영' },
+  { number: 6, name: '눈의 꽃', artist: '박효신' },
+  { number: 7, name: '사랑스러워', artist: '김종국' },
+  { number: 8, name: '내사람: Partner For Life', artist: 'SG 워너비' },
+  { number: 9, name: 'Love Love Love', artist: '에픽하이' },
+  { number: 10, name: '애인...있어요', artist: '백지영' },
+];
+
+function Home({ diaries, error }: HomeDiariesData) {
   return (
     <div className={styles.container}>
       <div className={styles.board}>
@@ -22,15 +23,15 @@ function Home({ diaries }: HomeDiariesData) {
           <span className={styles.title}>Updated news</span>
           <div className={styles.line}></div>
           <ul>
-            {diaries &&
-              diaries.map((diary) => (
-                <li key={diary.number} className={styles.item}>
-                  <div className={styles.badge}>다이어리</div>
-                  <Link href={`/diary/${diary.number}`}>
-                    <span className={styles['diary-title']}>{diary.title}</span>
-                  </Link>
-                </li>
-              ))}
+            {error && error}
+            {diaries.map((diary) => (
+              <li key={diary.number} className={styles.item}>
+                <div className={styles.badge}>다이어리</div>
+                <Link href={`/diary/${diary.number}`}>
+                  <span className={styles['diary-title']}>{diary.title}</span>
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div className={styles.status}>
